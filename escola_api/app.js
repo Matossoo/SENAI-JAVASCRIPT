@@ -1,25 +1,33 @@
 const express = require('express');
-const app = express();
-const port = 3001;
+const server = express();
 
-app.get('/aluno', (req, res) => {
-    res.send(
-        "nome: João da Silva, idade: 20, curso: Engenharia de Software"
-    );
+const cursos = ['Node.js', 'JavaScript', 'React', 'React Native'];
+
+server.get('/curso', (req, res) => {
+    const nome = req.query.nome
+    return res.json({ curso: `Aprendendo ${nome}` });
+    
 });
 
-app.get('/professor', (req, res) => {
-    res.send(
-        "nome: Maria Oliveira, idade: 35, disciplina: Matemática"
-    );
+server.get('/curso/:id', (req, res) => {
+    const id = req.params.id
+    return res.json( cursos[id] );
 });
 
-app.get('/escola', (req, res) => {
-    res.send(
-        "nome: Escola Estadual de Ensino Médio, endereço: Rua das Flores, 123"
-    );
+
+//========================================================
+
+//método HTTP: GET
+//listar todos os cursos
+//localhost:3055/cursos
+
+server.get('/cursos', (req, res) => {
+    return res.json(cursos);
 });
 
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+//node.js
+//localhost:3055/cursos?nome=Node.js
+
+server.listen(3055, () => {
+    console.log('Servidor rodando na porta 3055');
 });
