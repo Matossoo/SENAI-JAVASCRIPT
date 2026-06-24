@@ -10,7 +10,7 @@ server.get('/cursos', (req, res) => {
     const nome = req.query.nome;
 
     if (nome) {
-        return res.json({ curso: Curso de ${nome} });
+        return res.json({ curso: { nome } });
     }
 
     return res.json(cursos);
