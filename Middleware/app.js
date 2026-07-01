@@ -29,11 +29,15 @@ server.get('/cursos', (req, res) => {
 //localhost:3000/curso/2
 server.get('/cursos/:id', (req, res) => {
 
-    // Desestrutura o parâmetro "index" vindo da URL
-    const id = req.params.id;        
+    const {id} = req.params; // Obtém o ID do curso a partir da URL
 
-    // Retorna o curso correspondente ao índice informado
-    return res.json(cursos[id]);
+    const sql = 'SELECT * FROM cursos WHERE id = ?'; // Consulta SQL para selecionar um curso específico
+    
+    connection.query(sql, [id], (erro, resultados) => {
+        if (erro) {
+            return res.status(500).json({ error: erro.message });
+        }
+        return res.json(resultados[0]); // Retorna o primeiro resultado (único curso)
 });
 
 //Método HTTP: POST
