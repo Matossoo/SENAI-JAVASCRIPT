@@ -1,44 +1,27 @@
-// importa o framework express
+//Importa o framework express
 const express = require('express');
+const connection = require('./db'); // Importa a conexão com o banco de dados
 const server = express();
 
-// middleware que permite o servidor entender requisições com corpo em JSON
+//Middleware que permite o servidor entender requisições com JSON no corpo (req.body)
 server.use(express.json());
 
-const cursos = ['Node JS', 'JavaScript', 'React Native'];
-
-//middleware global
-server.use((req, res, next) => {
-    console.log("Requisição chamada")
-
-    return next();
-})
-
-//middleware local
-function CursoExiste(req, res, next){
-    if(!req.body.nome){
-        return res.status(400).json({ error: "Nome do curso é obrigatório" });
-    }
-    return next();
-}
-
-//middleware local
-//verifica se o id do curso existe
-function idCursoExiste(req, res, next){
-    const curso = cursos[req.params.id];
-    if(!curso){
-        return res.status(404).json({ error: "Curso não encontrado" });
-    }
-    return next();
-}
 
 //===================================
 //Método HTTP: GET
 //LISTAR TODOS OS CURSOS
 //localhost:3000/cursos
 server.get('/cursos', (req, res) => {
-    // Retorna a lista completa de cursos em formato JSON
-    return res.json(cursos);
+
+   const sql = 'SELECT * FROM cursos'; // Consulta SQL para selecionar todos os cursos
+
+   connection.query(sql, (erro, resultados) => {
+       if (erro) {
+           console.error('Erro ao consultar cursos:', erro);
+           return res.status(500).json({ error: erro.message });
+       }
+       return res.json(resultados);
+   });
 });
 
 //Método HTTP: GET
