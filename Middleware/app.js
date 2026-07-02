@@ -39,6 +39,7 @@ server.get('/cursos/:id', (req, res) => {
         }
         return res.json(resultados[0]); // Retorna o primeiro resultado (único curso)
 });
+});
 
 //Método HTTP: POST
 //CRIAR UM NOVO CURSO
@@ -95,5 +96,5 @@ server.delete('/cursos/:id', (req, res) => {
 //O metodo listen() faz o servidor começar a escutar
 // requisiçoes em uma determinada porta.
 server.listen(3023 , () => {
-    console.log("Servidor rodando na porta 3002");
+    console.log("Servidor rodando na porta 3023")
 });
