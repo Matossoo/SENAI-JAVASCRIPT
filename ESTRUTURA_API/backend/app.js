@@ -1,10 +1,9 @@
-================================================
-Arquivo: app.js
-================================================
+
  
 //Importa o framework express
 const express = require('express');
 const connection = require('./db');
+const  cors = require('cors');
 const server = express();
 
 //Middleware que permite o servidor entender requisições com JSON no corpo (req.body)
@@ -110,5 +109,5 @@ server.delete('/cursos/:id', (req, res) => {
 //O metodo listen() faz o servidor começar a escutar
 // requisiçoes em uma determinada porta.
 server.listen(3023 , () => {
-    console.log("Servidor rodando na porta 3002");
+    console.log("Servidor rodando na porta 3023");
 });
