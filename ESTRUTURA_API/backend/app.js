@@ -110,3 +110,5 @@ server.delete('/cursos/:id', (req, res) => {
 server.listen(3023 , () => {
     console.log("Servidor rodando na porta 3023");
 });
+
+//http://127.0.0.1:5500/
