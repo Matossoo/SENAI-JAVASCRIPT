@@ -1,6 +1,3 @@
-
- 
-
 const mysql = require('mysql2');
 
 const connetion = mysql.createConnection({
@@ -21,5 +18,3 @@ connetion.connect((erro) => {
 
 //Serve para exportar a variavel connection
 module.exports = connetion;
-
-
